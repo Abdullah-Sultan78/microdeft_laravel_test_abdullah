@@ -7,9 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Requisition extends Model
 {
     private static $requisition;
-    public static function newAsset($request)
+
+
+    public static function newRequisition($request)
     {
-        self::$requisition =new Asset();
+        self::$requisition =new Requisition();
+        self::$requisition ->asset_id   = $request->asset_id;
         self::$requisition ->name   = $request->name;
         self::$requisition ->phone   = $request->phone;
         self::$requisition ->email   = $request->email;

@@ -30,50 +30,60 @@
             </tbody>
           </table>
     </div>
-    <section>
-        <div class="container-fluid px-4  py-4">
-            <div class="row">
-                <div class="col-8 col-sm-8 offset-1">
-                    <h3 class="text-center m-3">Add Asset</h3>
 
-                    @if(session('message'))
-                    <div class="alert alert-success">{{ session('message') }}</div>
-                    @endif
-
-                    <form action="{{route('asset.add')}}" method="POST" enctype="multipart/form-data">
-                        @csrf
-
-                        <div class="mb-3">
-                          <label  class="form-label">Name</label>
-                          <input type="string" class="form-control" name="name" placeholder="Enter the Name of asset">
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Add Asset</button>
-                      </form>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <section>
         <div class="container-fluid px-4  py-4">
             <div class="row">
                 <div class="col-8 col-sm-8 offset-1">
-                    <h3 class="text-center m-3">Add Asset</h3>
+                    <h3 class="text-center m-3">Add Requisition</h3>
 
                     @if(session('message'))
                     <div class="alert alert-success">{{ session('message') }}</div>
                     @endif
 
-                    <form action="{{route('asset.add')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('requisition.add')}}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="mb-3">
-                          <label  class="form-label">Name</label>
-                          <input type="string" class="form-control" name="name" placeholder="Enter the Name of asset">
+                          <label  class="form-label">Name<span class="text-danger">*<span></label>
+                          <input type="string" class="form-control" name="name" placeholder="Enter the Name ">
+                          <span class="text-danger">{{$errors->has('name')? $errors->first('name'):''}}</span>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Add Asset</button>
+                        <div class="mb-3">
+                            <label  class="form-label">Phone<span class="text-danger">*<span></label>
+                            <input type="string" class="form-control" name="phone" placeholder="Enter the Number">
+                            @error('phone')
+                            <span class="text-danger">{{ $message }} </span>
+                           @enderror
+                        </div>
+
+                          <div class="mb-3">
+                            <label  class="form-label">Email<span class="text-danger">*<span></label>
+                            <input type="string" class="form-control" name="email" placeholder="Enter the email address">
+                            @error('email')
+                            <span class="text-danger">{{ $message }} </span>
+                           @enderror
+                        </div>
+
+                          <div class="mb-3">
+                            <label  class="form-label">Asset ID<span class="text-danger">*<span></label>
+                                <select class="form-control" name="asset_id" id="assetId">
+                                    <option value="" disabled selected>.......Seleted Asset......</option>
+                                       @foreach ($assets as $asset )
+                                       <option value="{{$asset->id}}">{{$asset->name}}</option>
+                                       @endforeach
+                                </select>
+                                <span class="text-danger">{{$errors->has('asset_id')? $errors->first('asset_id'):''}}</span>
+                          </div>
+                          <div class="mb-3">
+                            <label  class="form-label">Designation<span class="text-danger">*<span></label>
+                            <input type="string" class="form-control" name="designation" placeholder="Enter the Name of designation">
+                            <span class="text-danger">{{$errors->has('designation')? $errors->first('designation'):''}}</span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Add Requisition</button>
                       </form>
                 </div>
             </div>
