@@ -10,7 +10,19 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('index',['assets' => Asset::all()]);
+        return view('index',[
+            'assets' => Asset::all(),
+            'requisitions' => Requisition::paginate(3)
+    ]);
+    }
+
+    public function details($id){
+        return view('details',[
+            // 'assets' => Asset::find($id),
+            'requisitions' =>Requisition::where('asset_id',$id)->orderBy('id','desc')->get()
+
+    ]);
+
     }
 
     public function create(Request $request)
@@ -18,8 +30,8 @@ class HomeController extends Controller
 
         $request->validate([
             'name' => 'required',
-            'phone' => 'required',
-            'email'   => 'required',
+            'phone' => 'required|unique:requisitions,phone',
+            'email'   => 'required|unique:requisitions,email',
             'asset_id' => 'required',
             'designation' => 'required'
         ]);

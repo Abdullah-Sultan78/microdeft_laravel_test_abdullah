@@ -20,4 +20,9 @@ class Requisition extends Model
         self::$requisition->save();
 
     }
+    public function asset()
+    {
+      return $this -> belongsTo(Asset::class);
+    }
+
 }

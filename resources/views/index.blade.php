@@ -8,29 +8,70 @@
     <link rel="stylesheet" href="{{asset('/')}}css/bootstrap.min.css" />
 </head>
 <body>
-<h1>Home</h1>
+
 <div class="container">
     <div class="row mt-5">
         <table class="table table-bordered">
             <thead>
               <tr>
-                <th scope="col">#</th>
+                <th scope="col">SL No</th>
                 <th scope="col">Asset Name</th>
 
               </tr>
             </thead>
             <tbody>
-
+                @foreach ($assets as $asset )
                 <tr>
+                    <td>{{$loop->iteration}}</td>
+                    <td><a href="{{route('asset.details',['id'=>$asset->id])}}" target="_blank">{{$asset->name}}</a></td>
+                @endforeach
 
-                   <td>ghyhjj</td>
-                   <td>ghyhjj</td>
-               </tr>
 
             </tbody>
           </table>
     </div>
 
+
+
+    <div class="row mt-4">
+      <div>
+          <div class="card">
+              <div class="card-body">
+                  <h4 class="card-title">Requisition Table</h4>
+
+                  <div class="table-responsive m-t-40">
+                      <p class="text-center text-success"> {{Session::get('meassage')}}</p>
+                      <table id="myTable" class="table table-striped border">
+                          <thead>
+                              <tr>
+                                  <th>SL NO</th>
+                                  <th>Asset Name</th>
+                                  <th>Requisition Name</th>
+                                  <th>Phone</th>
+                                  <th>Email </th>
+                                  <th>Designition</th>
+
+                              </tr>
+                          </thead>
+                          <tbody>
+                            @foreach ($requisitions as $requisition)
+                              <tr>
+                                  <td>{{$loop->iteration}}</td>
+                                  <td>{{$requisition->asset->name}}</td>
+                                  <td>{{$requisition->name}}</td>
+                                  <td>{{$requisition->phone}}</td>
+                                  <td>{{$requisition->email}}</td>
+                                  <td>{{$requisition->designation}}</td>
+                              </tr>
+                            @endforeach
+                          </tbody>
+                      </table>
+                  </div>
+                  {{$requisitions->onEachSide(1)->links()}}
+              </div>
+          </div>
+      </div>
+  </div>
 
     <section>
         <div class="container-fluid px-4  py-4">

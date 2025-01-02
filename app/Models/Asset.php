@@ -14,4 +14,10 @@ class Asset extends Model
         self::$asset->save();
 
     }
+
+//    public function requisition(){
+//     return $this ->hasOne(Requisition::class);
+//    }
+
+
 }
